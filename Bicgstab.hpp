@@ -82,7 +82,7 @@ public:
      * @param maxit Maximum iteration
      * @return Returns a vector as approximate value
      */
-    friend vector<double> bicgstab(const matrix &A, const vector<double> &b, bool verbose, double TOL, int maxit);
+    //friend vector<double> bicgstab(const matrix &A, const vector<double> &b, bool verbose, double TOL, int maxit);
     friend vector<double> bicgstab(const matrix &A, const vector<double> &b, const vector<double> &x0, bool verbose, double TOL, int maxit);
 
     // Exception to be thrown no value was assigned to rows and columns
@@ -93,8 +93,12 @@ public:
     class initializer_wrong_size
     {
     };
-    // Exception to be thrown if two matrices of different sizes are added or subtracted
+    // Exception to be thrown if two matrices of different sizes are added
     class incompatible_sizes_add
+    {
+    };
+    // Exception to be thrown if two matrices of different sizes are subtracted
+    class incompatible_sizes_subtract
     {
     };
     // Exception to be thrown if two vectors of incompartible sizes are utilized
@@ -105,6 +109,19 @@ public:
     class incompatible_sizes_multiply
     {
     };
+    // Exception to be thrown if matrix and vector of incompatible sizes are multiplied
+    class incompatible_sizes_mat_vec_multiply
+    {
+    };
+    // Exception to be thrown when matrix will be divided by zero
+    class division_by_zero_not_allowed
+    {
+    };
+    // Exception to be thrown when matrix will be divided by zero
+    class condition_for_bicgstab_not_satisfied
+    {
+    };
+
     /**
      * @brief The private member consists of the number of rows, columns and the input data that was flattened to 1-dimension
      * 

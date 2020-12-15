@@ -54,7 +54,7 @@ matrix::matrix(const size_t &row, const size_t &col, const vector<double> &input
     if (rows == 0 or cols == 0)
         throw wrong_parameter{};
     if (input_vector.size() != rows * cols)
-        throw wrong_parameter{};
+        throw initializer_wrong_size{};
 }
 /**
  * @brief Returns the rows and columns of the matrix
@@ -185,7 +185,7 @@ matrix operator-(const matrix &A, const matrix &B)
 {
     size_t rows{A.get_rows()}, cols{B.get_cols()};
     if ((rows != B.get_rows()) or (cols != B.get_cols()))
-        throw matrix::incompatible_sizes_add{};
+        throw matrix::incompatible_sizes_subtract{};
     matrix c(rows, cols);
     for (size_t i{0}; i < rows; i++)
         for (size_t j{0}; j < cols; j++)
@@ -248,7 +248,7 @@ vector<double> operator*(const matrix &A, const vector<double> &x)
 {
     if (A.cols != x.size())
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::incompatible_sizes_mat_vec_multiply{};
     }
     vector<double> output(A.rows);
     for (size_t i = 0; i < A.rows; i++)
@@ -271,7 +271,7 @@ vector<double> operator*(const vector<double> &x, const matrix &A)
 {
     if (x.size() != A.rows)
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::incompatible_sizes_mat_vec_multiply{};
     }
     vector<double> output(A.cols);
 
@@ -451,19 +451,19 @@ vector<double> bicgstab(const matrix &A, const vector<double> &b, const vector<d
 
     if (A.rows != A.cols)
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::condition_for_bicgstab_not_satisfied{};
     }
     if (A.cols != b.size())
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::condition_for_bicgstab_not_satisfied{};
     }
     if (maxit < 1)
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::condition_for_bicgstab_not_satisfied{};
     }
     if (TOL <= 0)
     {
-        throw matrix::wrong_parameter{};
+        throw matrix::condition_for_bicgstab_not_satisfied{};
     }
     /**
  * @brief Definition of all parameters used in the algorithm

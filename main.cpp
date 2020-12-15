@@ -111,8 +111,42 @@ int main()
 
         return 0;
     }
-    catch (const std::exception &e)
+    catch (const matrix::wrong_parameter &e)
     {
-        std::cerr << e.what() << '\n';
+        cout << "Error: Attempt to create an invalid matrix!\n";
     }
+    catch (const matrix::initializer_wrong_size &e)
+    {
+        cout << "Error: Attempt to create a matrix with the wrong initializer size!\n";
+    }
+    catch (const matrix::incompatible_sizes_add &e)
+    {
+        cout << "Error: Cannot add matrices of incompatible sizes!\n";
+    }
+    catch (const matrix::incompatible_sizes_subtract &e)
+    {
+        cout << "Error: Cannot subtract matrix of incompatible size!\n";
+    }
+    catch (const matrix::incompatible_sizes_multiply &e)
+    {
+        cout << "Error: Cannot multiply matrix of incompatible size!\n";
+    }
+    catch (const matrix::incompatible_sizes_mat_vec_multiply &e)
+    {
+        cout << "Error: Cannot multiply matrix and vector of incompatible size!\n";
+    }
+    catch (const matrix::division_by_zero_not_allowed &e)
+    {
+        cout << "Error: Divide a matrix by zero!\n";
+    }
+    catch (const matrix::incompatible_vectors &e)
+    {
+        cout << "Error: Dimension between vectors are invalid! \n";
+    }
+    catch (const matrix::condition_for_bicgstab_not_satisfied &e)
+    {
+        cout << "Error: Conditions for bicgstab must be satisfied\n";
+    }
+
+    return 0;
 }
